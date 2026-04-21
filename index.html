@@ -8,7 +8,7 @@
   <meta name="keywords" content="Sayak Datta, gravitational waves, black holes, EMRI, GSSI, physics">
   <meta name="author" content="Sayak Datta">
 
-  <!-- Google structured data -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -125,8 +125,6 @@
 <!-- NAVIGATION -->
 <div class="nav">
   <a href="index.html">Home</a>
-  <a href="publications.html">Publications</a>
-  <a href="talks.html">Talks</a>
   <a href="teaching.html">Teaching</a>
   <a href="media.html">Media</a>
 </div>
@@ -163,6 +161,15 @@
   </li>
 </ul>
 
+<!-- MEDIA HIGHLIGHT -->
+<h2>Media</h2>
+<p>
+Watch my recent talk:
+<a href="media.html">
+Tidal heating: a hunt for the horizon — GW10, IIT Gandhinagar
+</a>.
+</p>
+
 <!-- ABOUT -->
 <h2>About</h2>
 <p>
@@ -182,58 +189,6 @@ information from gravitational wave signals.
   <li>Gravitational waves</li>
   <li>Compact binary coalescence</li>
 </ul>
-
-<!-- PUBLICATIONS -->
-<h2>Recent Publications</h2>
-<p>
-Full list available on 
-<a href="https://inspirehep.net/authors/1823092?ui-citation-summary=true" target="_blank">
-INSPIRE
-</a>.
-</p>
-
-<div id="pubs">Loading publications...</div>
-
-<script>
-fetch("https://inspirehep.net/api/literature?q=author:%22Sayak%20Datta%22&sort=mostrecent&size=10")
-.then(res => res.json())
-.then(data => {
-  const container = document.getElementById("pubs");
-
-  if (!data.hits || !data.hits.hits) {
-    container.innerHTML = "Could not load publications.";
-    return;
-  }
-
-  container.innerHTML = "";
-
-  data.hits.hits.forEach(p => {
-    const m = p.metadata;
-
-    const title = m.titles?.[0]?.title || "No title";
-    const authors = m.authors?.map(a => a.full_name).join(", ") || "";
-    const year = m.publication_info?.[0]?.year || "";
-
-    const link = p.links?.find(l => l.description === "abstract")?.value;
-
-    const div = document.createElement("div");
-    div.className = "paper";
-
-    div.innerHTML = `
-      <div class="title">
-        <a href="${link}" target="_blank">${title}</a>
-      </div>
-      <div class="authors">${authors}</div>
-      <div>(${year})</div>
-    `;
-
-    container.appendChild(div);
-  });
-})
-.catch(err => {
-  document.getElementById("pubs").innerHTML = "Error loading publications.";
-});
-</script>
 
 <!-- CONTACT -->
 <h2>Contact</h2>
