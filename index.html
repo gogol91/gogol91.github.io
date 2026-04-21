@@ -13,6 +13,22 @@
       color: #222;
     }
 
+    .nav {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #0056b3;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
     .header {
       display: flex;
       align-items: center;
@@ -82,24 +98,46 @@
 
 <body>
 
+<!-- NAVIGATION -->
+<div class="nav">
+  <a href="index.html">Home</a>
+  <a href="publications.html">Publications</a>
+  <a href="talks.html">Talks</a>
+  <a href="teaching.html">Teaching</a>
+  <a href="media.html">Media</a>
+</div>
+
 <!-- HEADER -->
 <div class="header">
-  <!-- Add profile.jpg to your repo -->
   <img src="profile.jpg" class="photo" alt="Profile photo">
 
   <div>
     <h1>Sayak Datta</h1>
     <div class="subtitle">
-      Assistant Professor, Gran Sasso Science Institute (GSSI), Italy
+      Assistant Professor, 
+      <a href="https://www.gssi.it/people/professors/lectures-physics" target="_blank">
+        Gran Sasso Science Institute (GSSI)
+      </a>, Italy
     </div>
 
     <div class="links">
       <a href="https://orcid.org/0000-0002-4774-0298" target="_blank">ORCID</a>
       <a href="https://inspirehep.net/authors/1823092?ui-citation-summary=true" target="_blank">INSPIRE</a>
+      <a href="https://github.com/gogol91" target="_blank">GitHub</a>
       <a href="CV.pdf" target="_blank">CV</a>
     </div>
   </div>
 </div>
+
+<!-- NEWS -->
+<h2>News</h2>
+<ul>
+  <li>
+    <a href="https://www.gssi.it/communication/news-events/item/25834-two-gssi-researchers-win-500k-in-pnrr-funding" target="_blank">
+      Two GSSI researchers win €500k in PNRR funding
+    </a>
+  </li>
+</ul>
 
 <!-- ABOUT -->
 <h2>About</h2>
@@ -121,7 +159,7 @@ information from gravitational wave signals.
 </ul>
 
 <!-- PUBLICATIONS -->
-<h2>Publications</h2>
+<h2>Recent Publications</h2>
 <p>
 Full list available on 
 <a href="https://inspirehep.net/authors/1823092?ui-citation-summary=true" target="_blank">
@@ -132,7 +170,7 @@ INSPIRE
 <div id="pubs">Loading publications...</div>
 
 <script>
-fetch("https://inspirehep.net/api/literature?q=author:%22Sayak%20Datta%22&sort=mostrecent&size=25")
+fetch("https://inspirehep.net/api/literature?q=author:%22Sayak%20Datta%22&sort=mostrecent&size=10")
 .then(res => res.json())
 .then(data => {
   const container = document.getElementById("pubs");
