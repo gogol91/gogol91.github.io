@@ -25,6 +25,7 @@
       height: 140px;
       border-radius: 50%;
       object-fit: cover;
+      background: #eee;
     }
 
     h1 {
@@ -83,7 +84,7 @@
 
 <!-- HEADER -->
 <div class="header">
-  <!-- OPTIONAL PHOTO -->
+  <!-- Add profile.jpg to your repo -->
   <img src="profile.jpg" class="photo" alt="Profile photo">
 
   <div>
@@ -94,7 +95,7 @@
 
     <div class="links">
       <a href="https://orcid.org/0000-0002-4774-0298" target="_blank">ORCID</a>
-      <a href="https://inspirehep.net/authors?q=Sayak%20Datta" target="_blank">INSPIRE</a>
+      <a href="https://inspirehep.net/authors/1823092?ui-citation-summary=true" target="_blank">INSPIRE</a>
       <a href="CV.pdf" target="_blank">CV</a>
     </div>
   </div>
@@ -123,7 +124,9 @@ information from gravitational wave signals.
 <h2>Publications</h2>
 <p>
 Full list available on 
-<a href="https://inspirehep.net/authors?q=Sayak%20Datta" target="_blank">INSPIRE</a>.
+<a href="https://inspirehep.net/authors/1823092?ui-citation-summary=true" target="_blank">
+INSPIRE
+</a>.
 </p>
 
 <div id="pubs">Loading publications...</div>
@@ -148,11 +151,15 @@ fetch("https://inspirehep.net/api/literature?q=author:%22Sayak%20Datta%22&sort=m
     const authors = m.authors?.map(a => a.full_name).join(", ") || "";
     const year = m.publication_info?.[0]?.year || "";
 
+    const link = p.links?.find(l => l.description === "abstract")?.value;
+
     const div = document.createElement("div");
     div.className = "paper";
 
     div.innerHTML = `
-      <div class="title">${title}</div>
+      <div class="title">
+        <a href="${link}" target="_blank">${title}</a>
+      </div>
       <div class="authors">${authors}</div>
       <div>(${year})</div>
     `;
