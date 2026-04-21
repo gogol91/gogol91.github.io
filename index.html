@@ -1,9 +1,74 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Sayak Datta</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    h1 { margin-top: 40px; }
+    h2 { border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+
+    .paper { margin-bottom: 20px; }
+    .title { font-weight: bold; }
+    .authors { font-size: 0.9em; color: #444; }
+  </style>
+</head>
+
 <body>
 
 <h1>Sayak Datta</h1>
-<p>This is my website.</p>
+<p>Assistant Professor, GSSI, L’Aquila, Italy</p>
+
+<h2>About</h2>
+<p>
+I work in gravitational wave physics, focusing on compact binaries,
+black holes, neutron stars, and extreme mass ratio inspirals.
+</p>
+
+<h2>Research Interests</h2>
+<ul>
+  <li>Extreme mass ratio inspirals</li>
+  <li>Black hole physics</li>
+  <li>Neutron star physics</li>
+  <li>Gravitational waves</li>
+</ul>
+
+<h2>Publications</h2>
+<div id="pubs">Loading publications...</div>
+
+<script>
+fetch("https://inspirehep.net/api/literature?q=author:%22Sayak%20Datta%22&sort=mostrecent&size=25")
+.then(res => res.json())
+.then(data => {
+  const container = document.getElementById("pubs");
+  container.innerHTML = "";
+
+  data.hits.hits.forEach(p => {
+    const m = p.metadata;
+
+    const title = m.titles?.[0]?.title || "";
+    const authors = m.authors?.map(a => a.full_name).join(", ");
+    const year = m.publication_info?.[0]?.year || "";
+
+    const div = document.createElement("div");
+    div.className = "paper";
+
+    div.innerHTML = `
+      <div class="title">${title}</div>
+      <div class="authors">${authors}</div>
+      <div>(${year})</div>
+    `;
+
+    container.appendChild(div);
+  });
+});
+</script>
 
 </body>
 </html>
