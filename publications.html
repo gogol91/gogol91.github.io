@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<a href="index.html">← Back to Home</a>
+
+<h1>Publications</h1>
+
+<div id="pubs">Loading...</div>
+
+<script>
+fetch("https://inspirehep.net/api/literature?q=author:%22Sayak%20Datta%22&sort=mostrecent&size=25")
+.then(res => res.json())
+.then(data => {
+  const container = document.getElementById("pubs");
+  container.innerHTML = "";
+
+  data.hits.hits.forEach(p => {
+    const title = p.metadata.titles[0].title;
+    const year = p.metadata.publication_info?.[0]?.year || "";
+
+    const div = document.createElement("div");
+    div.innerHTML = `<b>${title}</b> (${year})`;
+
+    container.appendChild(div);
+  });
+});
+</script>
+
+</body>
+</html>
